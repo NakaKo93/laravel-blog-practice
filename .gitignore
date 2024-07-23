@@ -1,3 +1,6 @@
+# DB content
+docker/db
+
 /vendor/
 node_modules/
 npm-debug.log
