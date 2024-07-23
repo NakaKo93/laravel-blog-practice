@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $Table) {
-            $Table->id();
-            $Table->string('title', 20);
-            $Table->string('explanation', 255);
+        Schema::create('favorites', function (Blueprint $table) {
+            $table->id('favorite_id');
 
-            $Table->timestamp('create_at')->userCurrent()->nullable();
-            $Table->timestamp('update_at')->userCurrent()->userCurrentOnUpdate()->nullable();
+            $table->timestamp('create_at')->userCurrent()->nullable();
+            $table->timestamp('update_at')->userCurrent()->userCurrentOnUpdate()->nullable();
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('favorites');
     }
 };
