@@ -13,7 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('blogs', function (Blueprint $Table) {
+            $Table->id();
+            $Table->string('title', 20);
+            $Table->string('explanation', 255);
+
+            $Table->timestamp('create_at')->userCurrent()->nullable();
+            $Table->timestamp('update_at')->userCurrent()->userCurrentOnUpdate()->nullable();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('blogs');
     }
 };

@@ -13,7 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('blog_favarites', function (Blueprint $Table) {
+            $Table->id();
+            $Table->foreignId('blog_id')->constrained('blogs');
+            $Table->foreignId('favorite_id')->constrained('favorites');
+
+            $Table->timestamp('create_at')->userCurrent()->nullable();
+            $Table->timestamp('update_at')->userCurrent()->userCurrentOnUpdate()->nullable();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('blog_favarites');
     }
 };
