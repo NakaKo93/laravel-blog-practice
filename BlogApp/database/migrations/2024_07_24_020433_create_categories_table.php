@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('favorites', function (Blueprint $table) {
-            $table->id('favorite_id');
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id('category_id');
+            $table->string('category_name', 20);
 
-            $table->timestamp('create_at')->userCurrent()->nullable();
+            $table->timestamp('created_at')->userCurrent()->nullable();
             $table->timestamp('update_at')->userCurrent()->userCurrentOnUpdate()->nullable();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('favorites');
+        Schema::dropIfExists('categories');
     }
 };

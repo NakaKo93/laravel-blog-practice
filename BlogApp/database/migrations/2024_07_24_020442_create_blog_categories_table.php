@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blog_favorites', function (Blueprint $table) {
+        Schema::create('blog_categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('blog_id');
-            $table->foreign('blog_id')->references('blog_id')->on('blogs')->cascadeOnDelete();
-            $table->unsignedBigInteger('favorite_id');
-            $table->foreign('favorite_id')->references('favorite_id')->on('favorites')->cascadeOnDelete();
+            $table->unsignedBigInteger('category_id');
 
             $table->timestamp('create_at')->userCurrent()->nullable();
             $table->timestamp('update_at')->userCurrent()->userCurrentOnUpdate()->nullable();
+
+            $table->foreign('blog_id')->references('blog_id')->on('blogs')->onDelete('cascade');
+            $table->foreign('category_id')->references('category_id')->on('categories')->onDelete('cascade');
         });
     }
 
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog_favorites');
+        Schema::dropIfExists('blog_categories');
     }
 };

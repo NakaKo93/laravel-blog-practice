@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class BlogFavoriteSeeder extends Seeder
+class BlogCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,21 +15,21 @@ class BlogFavoriteSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('blog_favorites')->insert([
+        DB::table('blog_categories')->insert([
             [
                 'id' => 1,
                 'blog_id' => 1,
-                'favorite_id' => 1,
+                'category_id' => 1,
             ],
             [
                 'id' => 2,
                 'blog_id' => 2,
-                'favorite_id' => 2,
+                'category_id' => 2,
             ],
             [
                 'id' => 3,
                 'blog_id' => 3,
-                'favorite_id' => 3,
+                'category_id' => 3,
             ],
         ]);
     }

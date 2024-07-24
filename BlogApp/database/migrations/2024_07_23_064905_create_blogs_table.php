@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id('blog_id');
             $table->string('title', 20);
             $table->string('explanation', 255);
+            $table->dateTime('published_date')->nullable();
+            $table->boolean('published_flg')->default(false);
+            $table->boolean('delete_flg')->default(false);
 
             $table->timestamp('create_at')->userCurrent()->nullable();
             $table->timestamp('update_at')->userCurrent()->userCurrentOnUpdate()->nullable();

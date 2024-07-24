@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class FavoriteSeeder extends Seeder
+class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,15 +15,18 @@ class FavoriteSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('favorites')->insert([
+        DB::table('categories')->insert([
             [
-                'favorite_id' => 1,
+                'category_id' => 1,
+                'category_name' => 'インテリア'
             ],
             [
-                'favorite_id' => 2,
+                'category_id' => 2,
+                'category_name' => '料理'
             ],
             [
-                'favorite_id' => 3,
+                'category_id' => 3,
+                'category_name' => '映画'
             ],
         ]);
     }
