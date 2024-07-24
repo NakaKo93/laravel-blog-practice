@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BlogSeeder::class,
             FavoriteSeeder::class,
-            Blog_favoriteSeeder::class,
+            BlogFavoriteSeeder::class,
         ]);
     }
 }
