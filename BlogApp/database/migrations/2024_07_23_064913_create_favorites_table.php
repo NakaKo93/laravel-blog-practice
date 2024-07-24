@@ -13,7 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('favorites', function (Blueprint $table) {
+            $table->id('favorite_id');
+
+            $table->timestamp('create_at')->userCurrent()->nullable();
+            $table->timestamp('update_at')->userCurrent()->userCurrentOnUpdate()->nullable();
+        });
     }
 
     /**
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('favorites');
     }
 };
