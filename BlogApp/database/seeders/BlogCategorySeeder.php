@@ -29,7 +29,7 @@ class BlogCategorySeeder extends Seeder
             [
                 'id' => 3,
                 'blog_id' => 3,
-                'category_id' => 3,
+                'category_id' => 1,
             ],
         ]);
     }
