@@ -11,7 +11,6 @@ class BlogSeeder extends Seeder
     /**
      * Run the database seeds.
      *
-     * @return void
      */
     public function run()
     {
@@ -26,19 +25,19 @@ class BlogSeeder extends Seeder
             ],
             [
                 'blog_id' => 2,
-                'title' => 'Laravel',
+                'title' => 'java',
                 'explanation' => 'javaのテスト',
-                'published_date' => date("Y-m-d H:i:s", mktime(15, 16, 36, 7, 23, 2024)),
+                'published_date' => date("Y-m-d H:i:s", mktime(15, 16, 36, 8, 23, 2024)),
                 'published_flg' => true,
                 'delete_flg' => false,
             ],
             [
                 'blog_id' => 3,
-                'title' => 'Java',
-                'explanation' => 'javaのテスト',
+                'title' => 'laravel',
+                'explanation' => 'laravelのテスト',
                 'published_date' => date("Y-m-d H:i:s", mktime(15, 16, 36, 7, 23, 2024)),
                 'published_flg' => true,
-                'delete_flg' => true,
+                'delete_flg' => false,
             ],
         ]);
     }

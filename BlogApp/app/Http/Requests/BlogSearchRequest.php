@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use \App\Http\Requests\ApiRequest;
+use App\Http\Requests\ApiRequest;
 
 class BlogSearchRequest extends ApiRequest
 {

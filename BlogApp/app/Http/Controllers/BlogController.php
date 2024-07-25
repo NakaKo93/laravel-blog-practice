@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Blog;
-use \App\Http\Requests\BlogCreateRequest;
-use \App\Http\Requests\BlogSearchRequest;
+use App\Http\Requests\BlogCreateRequest;
+use App\Http\Requests\BlogSearchRequest;
+use Illuminate\Support\Facades\Log;
 
 class BlogController extends Controller
 {
     /**
      * 投稿済みの記事をすべて取得
      * 
-     * @param null
      * @return Illuminate\Http\Response
      */
     public function FindAllBlog() {
         $blogs = Blog::FindAll();
         if (empty($blogs)) {
-            error_log('logsテーブルのデータが0件です。');
+            Log::error('logsテーブルのデータが0件です。');
             $error = [
                 'error' =>
                     [

@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Blog
 {
     /**
      * DBから投稿済みの記事をすべて取得
      * 
-     * @param null
      * @return collection|false 取得したデータ|取得したデータなし
      */
     public static function FindAll() {
@@ -43,7 +43,7 @@ class Blog
         } catch (Exeption $e) {
             DB::rolback();
 
-            error_log('投稿を登録する時にエラーが発生しました。');
+            Log::error('投稿を登録する時にエラーが発生しました。');
             throw $e;
             
             return false;
@@ -57,14 +57,14 @@ class Blog
      * @return collection 取得したデータ
      */
     public static function Search($conditions) {
-        $blogs = DB::table('blogs')
-                    ->join('blog_categories', 'blogs.blog_id', '=', 'blog_categories.blog_id')
-                    ->join('categories', 'blog_categories.category_id', 'categories.category_id')
-                    ->select('blogs.blog_id', 'blogs.title', 'blogs.explanation', 'blogs.published_date', 'categories.category_name')
-                    ->where('blogs.delete_flg', false)
-                    ->where('blogs.published_flg', $conditions['published_flg'])
-                    ->where('blogs.published_date', $conditions['published_date'])
-                    ->where('categories.category_id', $conditions['category_id'])
+        $blogs = DB::table('blogs as b')
+                    ->join('blog_categories as bc', 'b.blog_id', '=', 'bc.blog_id')
+                    ->join('categories as c', 'bc.category_id', 'c.category_id')
+                    ->select('b.blog_id', 'b.title', 'b.explanation', 'b.published_date', 'c.category_name')
+                    ->where('b.delete_flg', false)
+                    ->where('b.published_flg', $conditions['published_flg'])
+                    ->where('b.published_date', '>=', $conditions['published_date'])
+                    ->where('c.category_id', $conditions['category_id'])
                     ->get();
 
         return $blogs;
