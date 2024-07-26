@@ -17,6 +17,7 @@ class Blog
                     ->select('blog_id', 'title', 'explanation', 'published_date')
                     ->where('delete_flg', false)
                     ->where('published_flg', true)
+                    ->orderByDesc('published_date')
                     ->get();
     }
 

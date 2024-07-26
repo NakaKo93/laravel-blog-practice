@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\ItemNotFoundException;
 use App\Http\Requests\BlogCreateRequest;
 use App\Http\Requests\BlogSearchRequest;
 use App\Services\ResponseService;
@@ -19,16 +20,19 @@ class BlogController extends Controller
     public function FindAllBlog() {
         try {
             $blogs = Blog::FindAll();
-        } catch (Exeption $e) {
-            throw $e;
+
+            if ($blogs->isEmpty()) {
+                throw new ItemNotFoundException('blogsテーブルのデータが0件です。');
+            }
+        } catch (ItemNotFoundException $e) {
+            Log::errror($e);
+            return ResponseService::ErrorResponse(404, 'データが取得できませんでした。');
         }
 
         if ($blogs->isEmpty()) {
-            Log::error('blogsテーブルのデータが0件です。');
-            return ResponseService::ErrorResponse(404,'データが取得できませんでした。');
         }
 
-        return response()->json($blogs, 200);
+        return response()->json(['blogs' => $blogs], 200);
     }
 
     /**
@@ -50,7 +54,7 @@ class BlogController extends Controller
             throw $e;
         }
 
-        return ResponseService::NormalResponse(200,'登録に成功しました。');
+        return ResponseService::NormalResponse('登録に成功しました。');
     }
 
     /**
