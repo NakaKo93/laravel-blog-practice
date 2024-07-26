@@ -25,11 +25,8 @@ class BlogController extends Controller
                 throw new ItemNotFoundException('blogsテーブルのデータが0件です。');
             }
         } catch (ItemNotFoundException $e) {
-            Log::errror($e);
+            Log::error($e);
             return ResponseService::ErrorResponse(404, 'データが取得できませんでした。');
-        }
-
-        if ($blogs->isEmpty()) {
         }
 
         return response()->json(['blogs' => $blogs], 200);
