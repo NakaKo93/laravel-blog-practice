@@ -18,15 +18,15 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             [
                 'category_id' => 1,
-                'category_name' => 'インテリア'
+                'category_name' => 'java'
             ],
             [
                 'category_id' => 2,
-                'category_name' => '料理'
+                'category_name' => 'Laravel'
             ],
             [
                 'category_id' => 3,
-                'category_name' => '映画'
+                'category_name' => 'PHP'
             ],
         ]);
     }
