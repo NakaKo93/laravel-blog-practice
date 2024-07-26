@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Http\Requests\BlogCreateRequest;
 use App\Http\Requests\BlogSearchRequest;
 use Illuminate\Support\Facades\Log;
+use App\Services\ResponseService;
 
 class BlogController extends Controller
 {
@@ -15,17 +16,16 @@ class BlogController extends Controller
      * @return Illuminate\Http\Response
      */
     public function FindAllBlog() {
-        $blogs = Blog::FindAll();
-        if (empty($blogs)) {
-            Log::error('logsテーブルのデータが0件です。');
-            $error = [
-                'error' =>
-                    [
-                        'code' => '404',
-                        'message' => 'データが取得できませんでした。'
-                    ]
-            ];
-            return response()->json($error, 404);
+        try {
+            $blogs = Blog::FindAll();
+        } catch (Exeption $e) {
+            throw $e;
+        }
+
+        if ($blogs->isEmpty()) {
+            Log::error('blogsテーブルのデータが0件です。');
+            $response = ResponseService::ErrorResponse(404,'データが取得できませんでした。');
+            return response()->json($response, 404);
         }
 
         return response()->json($blogs, 200);
@@ -41,13 +41,8 @@ class BlogController extends Controller
         $blog = $request->all();
         $result = Blog::Create($blog);
 
-        if ($result) {
-            $response = [
-                'state' => '200',
-                'message' => '登録に成功しました。'
-            ];
-            return response()->json($response, 200);
-        }
+        $response = ResponseService::NormalResponse(200,'登録に成功しました。');
+        return response()->json($response, 200);
     }
 
     /**
@@ -57,7 +52,12 @@ class BlogController extends Controller
      * @return Illuminate\Http\Response
      */
     public function SearchBlogProcess(BlogSearchRequest $request) {
-        $conditions = $request->all();
+        try {
+            $conditions = $request->all();
+        } catch (Exeption $e) {
+            throw $e;
+        }
+
         $blogs = Blog::Search($conditions);
 
         return response()->json($blogs, 200);

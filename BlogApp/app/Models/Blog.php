@@ -18,11 +18,7 @@ class Blog
                     ->where('delete_flg', false)
                     ->where('published_flg', true)
                     ->get();
-
-        if ($blogs->isEmpty()) {
-            return false;
-        }
-
+                    
         return $blogs;
     }
 
@@ -32,21 +28,18 @@ class Blog
      * @param array $blog 記事データ
      * @return boolean 記事データの作成可否
      */
-    public static function Create($blog) {
+    public static function Create($blog): void
+    {
         DB::beginTransaction();
 
         try {
             DB::table('blogs')->insert($blog);
             DB::commit();
-
-            return true;
         } catch (Exeption $e) {
             DB::rolback();
 
             Log::error('投稿を登録する時にエラーが発生しました。');
             throw $e;
-            
-            return false;
         }
     }
 

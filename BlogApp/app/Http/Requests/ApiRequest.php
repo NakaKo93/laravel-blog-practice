@@ -17,7 +17,7 @@ class ApiRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator): void
     {
-        $error['errors']  = $validator->errors()->toArray();
+        $error['errors'] = $validator->errors()->toArray();
         $response = response()->json($error, 400);
         throw new HttpResponseException($response);
     }
