@@ -8,28 +8,34 @@ class ResponseService
      * 正常時のレスポンス
      * 
      * @param int $status ステータスコード
-     * @return string $message メッセージ
+     * @param string $message メッセージ
+     * @return Illuminate\Http\Response
      */
     public static function NormalResponse($status, $message) {
-        return [
-            'state' => $status,
+        $responseContent = [
+            'status' => $status,
             'message' => $message
         ];
+
+        return response()->json($responseContent, $status);
     }
 
     /**
      * エラー時のレスポンス
      * 
      * @param int $status ステータスコード
-     * @return string $message メッセージ
+     * @param string $message メッセージ
+     * @return Illuminate\Http\Response
      */
     public static function ErrorResponse($status, $message) {
-        return [
+        $responseContent = [
             'error' =>
                 [
                     'code' => $status,
                     'message' => $message
                 ]
         ];
+
+        return response()->json($responseContent, $status);
     }
 }

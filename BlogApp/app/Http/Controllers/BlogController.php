@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\BlogCreateRequest;
 use App\Http\Requests\BlogSearchRequest;
-use Illuminate\Support\Facades\Log;
 use App\Services\ResponseService;
+use App\Models\Blog;
 
 class BlogController extends Controller
 {
@@ -24,8 +25,7 @@ class BlogController extends Controller
 
         if ($blogs->isEmpty()) {
             Log::error('blogsテーブルのデータが0件です。');
-            $response = ResponseService::ErrorResponse(404,'データが取得できませんでした。');
-            return response()->json($response, 404);
+            return ResponseService::ErrorResponse(404,'データが取得できませんでした。');
         }
 
         return response()->json($blogs, 200);
@@ -39,10 +39,18 @@ class BlogController extends Controller
      */
     public function CreateBlogProcess(BlogCreateRequest $request) {
         $blog = $request->all();
-        $result = Blog::Create($blog);
 
-        $response = ResponseService::NormalResponse(200,'登録に成功しました。');
-        return response()->json($response, 200);
+        DB::beginTransaction();
+        try {
+            $result = Blog::Create($blog);
+            DB::commit();
+        } catch (Exeption $e) {
+            DB::rolback();
+            Log::error('投稿を登録する時にエラーが発生しました。');
+            throw $e;
+        }
+
+        return ResponseService::NormalResponse(200,'登録に成功しました。');
     }
 
     /**
@@ -52,13 +60,13 @@ class BlogController extends Controller
      * @return Illuminate\Http\Response
      */
     public function SearchBlogProcess(BlogSearchRequest $request) {
+        $conditions = $request->all();
+
         try {
-            $conditions = $request->all();
+            $blogs = Blog::Search($conditions);
         } catch (Exeption $e) {
             throw $e;
         }
-
-        $blogs = Blog::Search($conditions);
 
         return response()->json($blogs, 200);
     }
