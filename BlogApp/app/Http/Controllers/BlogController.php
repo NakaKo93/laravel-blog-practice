@@ -45,7 +45,7 @@ class BlogController extends Controller
         try {
             $result = Blog::Create($blog);
             DB::commit();
-        } catch (Exeption $e) {
+        } catch (Exception $e) {
             DB::rolback();
             Log::error('投稿を登録する時にエラーが発生しました。');
             throw $e;
@@ -65,7 +65,7 @@ class BlogController extends Controller
 
         try {
             $blogs = Blog::Search($conditions);
-        } catch (Exeption $e) {
+        } catch (Exception $e) {
             throw $e;
         }
 

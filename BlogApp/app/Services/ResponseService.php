@@ -10,7 +10,7 @@ class ResponseService
      * @param string $message メッセージ
      * @return Illuminate\Http\Response
      */
-    public static function NormalResponse($status, $message) {
+    public static function NormalResponse($message) {
         $responseContent = [
             'status' => 200,
             'message' => $message
