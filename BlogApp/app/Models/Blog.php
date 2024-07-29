@@ -7,15 +7,27 @@ use Illuminate\Support\Facades\DB;
 class Blog
 {
     /**
-     * DBから投稿済みの記事をすべて取得
+     * DBから消されていない記事をすべて取得
      * 
-     * @return collection|false 取得したデータ|取得したデータなし
+     * @return collection 取得したデータ
      */
-    public static function FindAll() {
+    public static function FindAllPublished() {
         return DB::table('blogs')
                     ->select('blog_id', 'title', 'explanation', 'published_date')
                     ->where('delete_flg', false)
                     ->where('published_flg', true)
+                    ->orderByDesc('published_date')
+                    ->get();
+    }
+
+    /**
+     * DBから記事をすべて取得
+     * 
+     * @return collection 取得したデータ
+     */
+    public static function FindAll() {
+        return DB::table('blogs')
+                    ->select('blog_id', 'title', 'explanation', 'published_date', 'published_flg', 'delete_flg')
                     ->orderByDesc('published_date')
                     ->get();
     }

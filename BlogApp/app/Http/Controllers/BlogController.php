@@ -8,6 +8,7 @@ use Illuminate\Support\ItemNotFoundException;
 use App\Http\Requests\BlogCreateRequest;
 use App\Http\Requests\BlogSearchRequest;
 use App\Services\ResponseService;
+use App\Services\FormatBlogService;
 use App\Models\Blog;
 
 class BlogController extends Controller
@@ -17,9 +18,9 @@ class BlogController extends Controller
      * 
      * @return Illuminate\Http\Response
      */
-    public function FindAllBlog() {
+    public function FindAllPublishedBlog() {
         try {
-            $blogs = Blog::FindAll();
+            $blogs = Blog::FindAllPublished();
 
             if ($blogs->isEmpty()) {
                 throw new ItemNotFoundException('blogsテーブルのデータが0件です。');
@@ -27,6 +28,22 @@ class BlogController extends Controller
         } catch (ItemNotFoundException $e) {
             Log::error($e);
             return ResponseService::ErrorResponse(404, 'データが取得できませんでした。');
+        }
+
+        return response()->json(['blogs' => $blogs], 200);
+    }
+
+    /**
+     * 投稿済みの記事をすべて取得
+     * 
+     * @return Illuminate\Http\Response
+     */
+    public function FindAllBlog() {
+        try {
+            $blogs = Blog::FindAll();
+            $blogs = FormatBlogService::FormatAllBlog($blogs);
+        } catch (\Exception $e) {
+            throw $e;
         }
 
         return response()->json(['blogs' => $blogs], 200);

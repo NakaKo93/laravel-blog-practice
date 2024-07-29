@@ -16,12 +16,16 @@ use App\Http\Controllers\BlogController;
 */
 
 Route::get('/blogs',
-    [BlogController::class, 'FindAllBlog']
+    [BlogController::class, 'FindAllPublishedBlog']
 )->name('blogs');
 
 Route::post('/blogs',
     [BlogController::class, 'CreateBlogProcess']
 )->name('blogs');
+
+Route::get('/all-blogs',
+    [BlogController::class, 'FindAllBlog']
+)->name('allBlogs');
 
 Route::post('/blogs/search',
     [BlogController::class, 'SearchBlogProcess']
