@@ -19,26 +19,10 @@ class BlogSeeder extends Seeder
                 'blog_id' => 1,
                 'title' => 'java',
                 'explanation' => 'javaのテスト',
-                'published_date' => date("Y-m-d H:i:s", mktime(15, 16, 36, 7, 23, 2024)),
-                'published_flg' => true,
-                'delete_flg' => false,
-            ],
-            [
-                'blog_id' => 2,
-                'title' => 'java',
-                'explanation' => 'javaのテスト',
-                'published_date' => date("Y-m-d H:i:s", mktime(15, 16, 36, 8, 23, 2024)),
-                'published_flg' => true,
-                'delete_flg' => false,
-            ],
-            [
-                'blog_id' => 3,
-                'title' => 'laravel',
-                'explanation' => 'laravelのテスト',
-                'published_date' => date("Y-m-d H:i:s", mktime(15, 16, 36, 7, 23, 2024)),
-                'published_flg' => true,
-                'delete_flg' => false,
-            ],
+                'published_date' => date("Y-m-d H:i:s", mktime(0, 0, 0, 7, 23, 2024)),
+                'published_flg' => 1,
+                'delete_flg' => 0
+            ]
         ]);
     }
 }
