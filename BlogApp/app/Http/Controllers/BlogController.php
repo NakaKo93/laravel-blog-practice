@@ -39,12 +39,14 @@ class BlogController extends Controller
      * @return Illuminate\Http\Response
      */
     public function FindAllBlog() {
+        Log::debug(__FUNCTION__.'、"START"');
         try {
             $blogs = Blog::FindAll();
             $blogs = FormatBlogService::FormatAllBlog($blogs);
         } catch (\Exception $e) {
             throw $e;
         }
+        Log::debug(__FUNCTION__.'、"END"');
 
         return response()->json(['blogs' => $blogs], 200);
     }
