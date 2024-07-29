@@ -2,8 +2,7 @@
 
 namespace App\Services;
 
-class ResponseService
-{
+class ResponseService {
     /**
      * 正常時のレスポンス
      * 
