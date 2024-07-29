@@ -69,8 +69,6 @@ class BlogController extends Controller
             throw $e;
         }
 
-        Log::debug($blogs);
-
         return response()->json($blogs, 200);
     }
 }
