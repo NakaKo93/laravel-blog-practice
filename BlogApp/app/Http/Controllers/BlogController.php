@@ -43,11 +43,11 @@ class BlogController extends Controller
 
         DB::beginTransaction();
         try {
-            $result = Blog::Create($blog);
+            Blog::Create($blog);
             DB::commit();
-        } catch (Exception $e) {
-            DB::rolback();
+        } catch (\Exception $e) {
             Log::error('投稿を登録する時にエラーが発生しました。');
+            DB::rolback();
             throw $e;
         }
 
@@ -65,9 +65,11 @@ class BlogController extends Controller
 
         try {
             $blogs = Blog::Search($conditions);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw $e;
         }
+
+        Log::debug($blogs);
 
         return response()->json($blogs, 200);
     }

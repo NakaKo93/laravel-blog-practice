@@ -20,17 +20,7 @@ class BlogCategorySeeder extends Seeder
                 'id' => 1,
                 'blog_id' => 1,
                 'category_id' => 1,
-            ],
-            [
-                'id' => 2,
-                'blog_id' => 2,
-                'category_id' => 1,
-            ],
-            [
-                'id' => 3,
-                'blog_id' => 3,
-                'category_id' => 2,
-            ],
+            ]
         ]);
     }
 }
