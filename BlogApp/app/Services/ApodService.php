@@ -16,9 +16,9 @@ class ApodService {
         $client = new Client();
         $response = $client->request(
             'GET',
-            'https://api.nasa.gov/planetary/apod',
+            config('NasaApi.NASA-API'),
             ['query' => [
-                'api_key' => config('getKey.NASA-API-Key'),
+                'api_key' => config('NasaApi.NASA-API-Key'),
                 'start_date' => $date['start_date'],
                 'end_date' => $date['end_date']
             ]]
