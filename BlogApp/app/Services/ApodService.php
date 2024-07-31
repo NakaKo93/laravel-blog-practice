@@ -16,7 +16,7 @@ class ApodService {
         $client = new Client();
         $response = $client->request(
             'GET',
-            config('NasaApi.NASA-API'),
+            config('NasaApi.NASA-API-URL'),
             ['query' => [
                 'api_key' => config('NasaApi.NASA-API-Key'),
                 'start_date' => $date['start_date'],
