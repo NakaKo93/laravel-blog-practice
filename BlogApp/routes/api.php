@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ApodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +30,7 @@ Route::get('/all-blogs',
 Route::post('/blogs/search',
     [BlogController::class, 'SearchBlogProcess']
 )->name('blogsSearch');
+
+Route::post('/apod',
+    [ApodController::class, 'ApodProcess']
+)->name('apod');
