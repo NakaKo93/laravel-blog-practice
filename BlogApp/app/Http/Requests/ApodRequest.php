@@ -24,8 +24,8 @@ class ApodRequest extends ApiRequest
     public function rules()
     {
         return [
-            'start_date' => 'required|date_format:Y-m-d',
-            'end_date' => 'required|date_format:Y-m-d'
+            'start_date' => 'required|date_format:Y-n-d',
+            'end_date' => 'required|date_format:Y-n-d'
         ];
     }
 }

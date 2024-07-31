@@ -26,7 +26,7 @@ class BlogCreateRequest extends ApiRequest
         return [
             'title' => 'required|string|max:20',
             'explanation' => 'required|string|max:255',
-            'published_date' => 'nullable|date_format:Y-m-d H:i:s',
+            'published_date' => 'nullable|date_format:Y-n-d H:i:s',
             'published_flg' => 'required|boolean',
             'delete_flg' => 'required|boolean'
         ];
