@@ -25,7 +25,7 @@ class BlogSearchRequest extends ApiRequest
     {
         return [
             'category_id' => 'required|integer',
-            'published_date' => 'required|date_format:Y-m-d H:i:s',
+            'published_date' => 'required|date_format:Y-n-d H:i:s',
             'published_flg' => 'required|boolean'
         ];
     }
