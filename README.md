@@ -1,1 +1,1 @@
-# cin-blog-practice
+# laravel-blog-practice
